@@ -10,29 +10,36 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
-float fact(int n){
-	if((n==0)|| (n==1)){
-		return 1;
-		}
-	else{
-		return (n * fact(n-1));
-	}
 
-}
 int main(void) {
-	int exp,iterations;
-	double result=0;
+	float exp; // exponent can be any real number
+	int iterations;
+	double result = 1; // initialized with 1 (first term always 1)
 	printf("Please enter the exponent value: ");
 	fflush(stdout);
-	scanf("%d",&exp);
+	scanf("%f",&exp);
 	printf("Please enter the iterations number : ");
 	fflush(stdout);
 	scanf("%d",&iterations);
-	for (int i = 0;i <= iterations ; i++ ){
-		result += (pow(exp,i)/fact(i));
+	if (iterations > 0)
+	{
+	for (int i = 1;i < iterations ; i++ ){
+		double power_result = 1;
+		double fact_result = 1;
+		for (int j = 1; j <= i; j ++)
+		{
+			power_result *= exp;
+			fact_result *= j;
+		}
+		result += power_result / fact_result;
 	}
-	printf("e^%d = %lf\n",exp,result);
+		printf("e^%0.3f = %lf\n", exp, result);
+	}
+	else
+	{
+		printf("Can't be solved in %d iterations!!", iterations);
+	}
+
 	return 0;
 }
