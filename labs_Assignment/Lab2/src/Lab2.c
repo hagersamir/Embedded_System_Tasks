@@ -12,13 +12,6 @@
 #include <stdlib.h>
 
 ////Q1
-////8 for total no of bits of char
-//unsigned char right_shift(unsigned char x , int n){
-//	return ((x >> n) | (x << (8 - n) ));
-//}
-//unsigned char left_shift(unsigned char x , int n){
-//	return ((x << n) | (x >> (8 - n) ));
-//}
 //int main(void) {
 //	unsigned int x;
 //	int n;
@@ -36,11 +29,13 @@
 //  switch (option) {
 //		case 'R':
 //		case 'r':
-//			printf("Rotate right %d times : 0x%02x\n", n, right_shift(x, n));
+// 	unsigned char right_shift = ((x >> n) | (x << (8 - n) ));
+//			printf("Rotate right %d times : 0x%02x\n", n, right_shift);
 //			break;
 //		case 'L':
 //		case 'l':
-//			printf("Rotate left %d times : 0x%02x\n", n, left_shift(x, n));
+//			unsigned char left_shift = ((x << n) | (x >> (8 - n) ));
+//			printf("Rotate left %d times : 0x%02x\n", n, left_shift);
 //			break;
 //		default:
 //			printf("Invalid option!\n");
