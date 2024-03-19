@@ -13,29 +13,29 @@
 #include <stdlib.h>
 
 
-//Q1
-int main(void)
-{
-	int u,a,t;
-	float V,S ;
-
-	printf("Please Enter the value of u: ");
-    fflush(stdout);
-	scanf("%d",&u);
-	printf("Please Enter the value of a: ");
-    fflush(stdout);
-	scanf("%d",&a);
-	printf("Please Enter the value of t: ");
-    fflush(stdout);
-	scanf("%d",&t);
-
-	V = u + (a * t) ;
-	S = (u*t) + (0.5 *a*t*t);
-
-	printf("The Value of Final Velocity Is %f m/sec \n",V);
-	printf("the Value of Distance Is %f m",S);
-	return 0;
-}
+////Q1
+//int main(void)
+//{
+//	float u, a, t, V, S;
+//
+//	printf("Please Enter the value of u: ");
+//    fflush(stdout);
+//	scanf("%f",&u);
+//	printf("Please Enter the value of a: ");
+//    fflush(stdout);
+//	scanf("%f",&a);
+//	printf("Please Enter the value of t: ");
+//    fflush(stdout);
+//	scanf("%f",&t);
+//
+//	V = u + (a * t) ;
+//	S = (u*t) + (0.5 *a*t*t);
+//
+//	printf("The Value of Final Velocity Is %f m/sec \n",V);
+//	printf("the Value of Distance Is %f m",S);
+//
+//	return 0;
+//}
 
 ////Q2
 //int main(void)
@@ -47,7 +47,7 @@ int main(void)
 //	scanf("%d %d %d",&a,&b,&c);
 //	Sum = a + b+ c;
 //	Average = (a + b + c) / 3;
-//	Product = a * b *c;
+//	Product = a * b * c;
 //	Smallest = Largest = a;
 //	Smallest = (Smallest > b)? b : Smallest ;
 //	Smallest = (Smallest > c)? c : Smallest ;
@@ -62,19 +62,22 @@ int main(void)
 //	return 0;
 //}
 
-////Q3
-//int main(void)
-//{
-//	int total_sec,hr,min,sec;
-//	printf("Please Enter The Total Time elapsed in second : ");
-//	fflush(stdout);
-//	scanf("%d",&total_sec);
-//	hr = total_sec /3600;
-//	int reminder_min_sec = total_sec % 3600;
-//	min = reminder_min_sec/60;
-//	sec = reminder_min_sec % 60;
-//	printf("Time is %d : %d : %d",hr,min,sec);
-//	return 0;
-//}
+//Q3
+int main(void) {
+    int total_sec, hr, min, sec;
 
+    printf("Please Enter The Total Time elapsed in seconds: ");
+    fflush(stdout);
+    if (scanf("%d", &total_sec) != 1 || total_sec < 0) {
+        printf("Invalid input! Please enter a non-negative integer.\n");
+        return 1;
+    }
+    hr = total_sec / 3600;
+    int reminder_min_sec = total_sec % 3600;
+    min = reminder_min_sec / 60;
+    sec = reminder_min_sec % 60;
+
+    printf("Time is %d:%02d:%02d\n", hr, min, sec);
+    return 0;
+}
 
