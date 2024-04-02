@@ -27,14 +27,15 @@ int main(void) {
 	for (int i = 1;i < iterations ; i++ ){
 		double power_result = 1;
 		double fact_result = 1;
-		for (int j = 1; j <= i; j ++)
+		for (int j = 1; j <= i; j ++) // if i == 2
 		{
 			power_result *= exp;
 			fact_result *= j;
 		}
 		result += power_result / fact_result;
 	}
-		printf("e^%0.3f = %lf\n", exp, result);
+
+		printf("exp(%0.3f) = %lf\n", exp, result);
 	}
 	else
 	{
