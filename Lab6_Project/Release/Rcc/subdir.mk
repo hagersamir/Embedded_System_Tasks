@@ -17,7 +17,7 @@ OBJS += \
 Rcc/%.o: ../Rcc/%.c Rcc/subdir.mk
 	@echo 'Building file: $<'
 	@echo 'Invoking: GNU Arm Cross C Compiler'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -Wall -Wextra -g -DNDEBUG -DSTM32F401xE -DHSE_VALUE=8000000 -I"../include" -I"../system/include" -I"../system/include/cmsis" -I"../system/include/stm32f4-hal" -I"C:\Study\Embedded System\Lab4_Startup_Project\Lib" -I"C:\Study\Embedded System\Lab4_Startup_Project\Rcc" -I"C:\Study\Embedded System\Lab4_Startup_Project\Gpio" -I"C:\Study\Embedded System\Lab4_Startup_Project\Keypad" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -ffreestanding -Wall -Wextra -g -DNDEBUG -DSTM32F401xE -DHSE_VALUE=8000000 -I"../include" -I"../system/include" -I"../system/include/cmsis" -I"../system/include/stm32f4-hal" -I"C:\Study\Embedded System\ES_Github\Embedded_System_Tasks\Lab6_Project\Lib" -I"C:\Study\Embedded System\ES_Github\Embedded_System_Tasks\Lab6_Project\Rcc" -I"C:\Study\Embedded System\ES_Github\Embedded_System_Tasks\Lab6_Project\Gpio" -I"C:\Study\Embedded System\ES_Github\Embedded_System_Tasks\Lab6_Project\Keypad" -std=gnu11 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
