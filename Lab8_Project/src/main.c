@@ -7,9 +7,9 @@
 #include "EXTI.h"
 
 volatile uint32 counter = 0;
-volatile uint32 interrupt_flag = 0;
+//volatile uint32 interrupt_flag = 0;
 
-void Display_7segment(uint16);
+void Display_7segment();
 void INC(void);
 void DEC(void);
 
@@ -20,10 +20,10 @@ void Init(void)
 	{
 		Gpio_ConfigPin(GPIO_A, i, GPIO_OUTPUT, GPIO_PUSH_PULL);
 	}
-	Gpio_ConfigPin(GPIO_B, 4, GPIO_INPUT, GPIO_PULL_UP);
-	Gpio_ConfigPin(GPIO_A, 9, GPIO_INPUT, GPIO_PULL_UP);
+	Gpio_ConfigPin(GPIO_A, INC_PIN, GPIO_INPUT, GPIO_PULL_UP);
+	Gpio_ConfigPin(GPIO_B, DEC_PIN, GPIO_INPUT, GPIO_PULL_UP);
 }
-void Display_7segment(uint16 counter)
+void Display_7segment()
 {
 	// Turn off all segments first
 	for (uint32 i = 0; i < 7; i++)
@@ -116,17 +116,16 @@ int main()
 	// Initialize EXTI for push buttons
 	Exti_Init(INC_PORT, INC_PIN, FALLING_EDGE);
 	Exti_Init(DEC_PORT, DEC_PIN, FALLING_EDGE);
-	Exti_Enable(DEC_PIN);
+	Nvic_EnableInterrupt(10); // for decrement push button
+	Nvic_EnableInterrupt(23);// for increment push button
 	Exti_Enable(INC_PIN);
-	// Nvic_EnableInterrupt(10);
-	// Nvic_EnableInterrupt(15);
+	Exti_Enable(DEC_PIN);
 	Init();
+
 	while (1)
 	{
-		// Display_7segment(counter);
-		// 	for (volatile unsigned long i = 0; i < 1000000; i++)
-		// 	{
-		// 	}
+		 Display_7segment();
+		 for (volatile unsigned long i = 0; i < 1000000; i++);
 	}
 
 	return 0;
@@ -142,7 +141,6 @@ void INC(void)
 	{
 		counter = 0; // go back to 0 if counter exceeds 9
 	}
-	interrupt_flag = 1; // Set flag to update display
 }
 void DEC(void)
 {
@@ -155,42 +153,18 @@ void DEC(void)
 	{
 		counter = 9; // go back to max value (9) if counter goes below 0
 	}
-	interrupt_flag = 1; // Set flag to update display
 }
 
-void EXTI0_IRQHandler(void)
+void EXTI9_5_IRQHandler(void)
 {
-	
-	if ((EXTI->PR)& (1<< INC_PIN))
-	{
-		INC();
-		if (interrupt_flag)
-		{
-			Display_7segment(counter);
-			for (volatile unsigned long i = 0; i < 1000000; i++)
-			{
-			}
-			interrupt_flag = 0; // Reset the flag
-		}
-		// clear pending flag for pin A9
-		SET_BIT(EXTI->PR, INC_PIN);
-	}
-	
+	INC();
+	SET_BIT(EXTI->PR, INC_PIN);
+
 }
 
-void EXTI1_IRQHandler(void)
+void EXTI4_IRQHandler(void)
 {
-	if ((EXTI->PR)& (1<< DEC_PIN)){
-		DEC();
-		if (interrupt_flag)
-		{
-			Display_7segment(counter);
-			for (volatile unsigned long i = 0; i < 1000000; i++)
-			{
-			}
-			interrupt_flag = 0; // Reset the flag
-		}
-		// clear pending flag for pin B4
-		SET_BIT(EXTI->PR, DEC_PIN);
-	}
+	DEC();
+	SET_BIT(EXTI->PR, DEC_PIN);
+
 }
